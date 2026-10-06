@@ -2,10 +2,678 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Copa Presida - TESTE (carregando...)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Copa Presida de Futevôlei — 5ª Etapa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070708;--bg2:#121214;--bg3:#1a1a1e;--line:#2c2c32;
+  --cream:#f4efe6;--muted:#9a958c;--gold:#c9a227;--gold2:#e3c56b;--gold3:#f5d76e;
+  --radius:18px;--shadow:0 20px 50px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--cream);font-family:'Work Sans',system-ui,sans-serif}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;min-height:100vh}
+a{color:var(--gold2);text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+
+header{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:10px 16px;min-height:56px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:30;background:rgba(7,7,8,.92);backdrop-filter:blur(14px);
+}
+.logo-wrap{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cream)}
+.logo-3d{width:44px;height:44px;perspective:600px;flex-shrink:0}
+.logo-3d .face{
+  width:100%;height:100%;border-radius:12px;
+  background:linear-gradient(145deg,#f5d76e 0%,#c9a227 45%,#8a6d12 100%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.15),0 8px 20px rgba(201,162,39,.35),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 6px rgba(0,0,0,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-family:Anton,sans-serif;font-size:26px;color:#111;
+  text-shadow:0 1px 0 rgba(255,255,255,.4);
+  transform:rotateY(-12deg) rotateX(8deg);transition:transform .4s ease;
+  position:relative;overflow:hidden;
+}
+.logo-3d .face::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.45) 50%,transparent 60%);
+  transform:translateX(-120%);animation:shine 3.5s ease-in-out infinite;
+}
+@keyframes shine{0%,70%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.logo-3d:hover .face{transform:rotateY(8deg) rotateX(-4deg) scale(1.05)}
+.logo-text{font-weight:700;font-size:14px;line-height:1.15}
+.logo-text small{display:block;color:var(--muted);font-weight:500;font-size:11px}
+.hdr-nav{display:flex;gap:6px;flex-wrap:nowrap}
+.hdr-btn{
+  border:1px solid var(--line);background:transparent;color:var(--cream);
+  border-radius:999px;padding:7px 12px;font:600 12px/1.1 'Work Sans',sans-serif;
+  white-space:nowrap;transition:background .2s,border-color .2s;
+}
+.hdr-btn:hover{border-color:var(--gold);background:rgba(201,162,39,.12)}
+
+.hero{padding:36px 0 20px;text-align:center;position:relative;overflow:hidden}
+.hero::before{
+  content:'';position:absolute;inset:-20% -10% auto;height:60%;
+  background:radial-gradient(ellipse at 50% 0%,rgba(201,162,39,.18),transparent 70%);pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--bg2);
+  border-radius:999px;padding:6px 14px;font-size:12px;color:var(--muted);margin-bottom:14px;
+}
+.hero-badge span{color:var(--gold2);font-weight:700}
+.hero h1{
+  font-family:Anton,sans-serif;letter-spacing:.02em;text-transform:uppercase;
+  font-size:clamp(42px,10vw,80px);margin:0 0 8px;line-height:.92;
+  background:linear-gradient(180deg,var(--cream) 30%,var(--gold2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero h1 em{font-style:normal;color:var(--gold);-webkit-text-fill-color:var(--gold)}
+.hero-lead{color:var(--muted);font-size:15px;max-width:420px;margin:0 auto 20px;line-height:1.5}
+
+.p-showcase{width:min(220px,55vw);height:min(220px,55vw);margin:10px auto 28px;perspective:900px;cursor:grab;user-select:none}
+.p-showcase:active{cursor:grabbing}
+.p-cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .15s linear}
+.p-face{
+  position:absolute;inset:0;border-radius:28px;display:flex;align-items:center;justify-content:center;
+  font-family:Anton,sans-serif;font-size:clamp(90px,28vw,130px);color:#111;backface-visibility:hidden;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.35),inset 0 -4px 12px rgba(0,0,0,.3);
+}
+.p-face.front{background:linear-gradient(145deg,#f5d76e,#c9a227 50%,#8a6d12);transform:translateZ(20px);text-shadow:0 2px 0 rgba(255,255,255,.35)}
+.p-face.back{background:linear-gradient(145deg,#8a6d12,#c9a227);transform:rotateY(180deg) translateZ(20px)}
+.p-face.left{background:linear-gradient(180deg,#b8921f,#6b520c);transform:rotateY(-90deg) translateZ(20px)}
+.p-face.right{background:linear-gradient(180deg,#e3c56b,#a07d18);transform:rotateY(90deg) translateZ(20px)}
+.p-shine{
+  position:absolute;inset:0;border-radius:28px;pointer-events:none;
+  background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);
+  mix-blend-mode:soft-light;opacity:.7;animation:shine 4s ease-in-out infinite;
+}
+.hero-poster-ph{
+  border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
+  margin:0 auto 24px;max-width:640px;aspect-ratio:16/9;background:var(--bg2);
+  display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;position:relative;
+}
+.hero-poster-ph img{width:100%;height:100%;object-fit:cover}
+.hero-poster-ph .ph-label{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(7,7,8,.55);font-weight:600;letter-spacing:.04em;
+}
+
+.sec{padding:28px 0 10px}
+.sec-title{font-family:Anton,sans-serif;letter-spacing:.02em;text-transform:uppercase;font-size:clamp(28px,6vw,40px);margin:0 0 6px;text-align:center}
+.sec-sub{color:var(--muted);text-align:center;margin:0 0 22px;font-size:14px}
+.day-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.day-tab{
+  border:1px solid var(--line);background:var(--bg2);color:var(--cream);border-radius:999px;
+  padding:10px 16px;font:600 13px/1 'Work Sans',sans-serif;cursor:pointer;transition:all .2s;
+}
+.day-tab.active{background:var(--gold);color:#111;border-color:var(--gold)}
+.day-tab:hover:not(.active){border-color:var(--gold2)}
+.cat-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.cat-card{
+  background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px;
+  text-align:left;cursor:pointer;position:relative;transition:transform .2s,border-color .2s,box-shadow .2s;
+  display:flex;flex-direction:column;gap:8px;min-height:120px;
+}
+.cat-card:hover:not(.off){transform:translateY(-3px);border-color:var(--gold);box-shadow:0 12px 30px rgba(201,162,39,.15)}
+.cat-card.off{opacity:.45;cursor:not-allowed}
+.cat-card .time{font-family:Anton,sans-serif;font-size:22px;color:var(--gold2);letter-spacing:.02em}
+.cat-card .name{font-weight:700;font-size:15px;line-height:1.25}
+.cat-card .meta{font-size:12px;color:var(--muted);margin-top:auto}
+.cat-card .go{
+  position:absolute;top:14px;right:14px;font-size:11px;font-weight:700;color:var(--gold);
+  border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:rgba(201,162,39,.08);
+}
+.cat-card.off .go{color:var(--muted)}
+.cat-card.hidden{display:none}
+
+.info-3d-wrap{margin:24px 0 8px;perspective:1200px;display:none}
+.info-3d-wrap.show{display:block}
+.info-3d{
+  background:linear-gradient(160deg,var(--bg3),var(--bg2));border:1px solid var(--line);
+  border-radius:22px;padding:20px;transform-style:preserve-3d;box-shadow:var(--shadow);transition:transform .3s ease;
+}
+.info-3d:hover{transform:rotateY(-4deg) rotateX(2deg)}
+.info-3d h3{font-family:Anton,sans-serif;font-size:28px;margin:0 0 4px;color:var(--gold2)}
+.info-3d .info-time{color:var(--cream);font-weight:700;margin-bottom:10px}
+.info-3d p{color:var(--muted);font-size:14px;margin:0 0 14px;line-height:1.5}
+.info-3d .btn-insc{
+  display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#111;border:0;
+  border-radius:999px;padding:12px 20px;font:700 14px 'Work Sans',sans-serif;cursor:pointer;
+}
+
+#inscricao{display:none;padding:28px 0 10px;border-top:1px solid var(--line)}
+#inscricao.show{display:block}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:12px 0}
+label{display:block;margin:0 0 12px;font-size:13px;color:var(--muted)}
+input,select,textarea{
+  width:100%;margin-top:6px;height:44px;border-radius:12px;border:1px solid var(--line);
+  background:#0c0c0e;color:var(--cream);padding:0 12px;font:inherit;outline:none;transition:border-color .2s;
+}
+input:focus,textarea:focus{border-color:var(--gold)}
+textarea{height:80px;padding:10px 12px}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.form-row-2{grid-template-columns:1fr}}
+.btn{border:1px solid var(--line);background:transparent;color:var(--cream);border-radius:999px;padding:12px 16px;font-weight:700;cursor:pointer;font:inherit}
+.btn-solid{background:var(--gold);color:#111;border-color:var(--gold)}
+.btn-block{width:100%}
+.note{color:var(--muted);font-size:13px}
+.pay-tabs{display:flex;gap:8px;margin:10px 0}
+.pay-tab{flex:1;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--cream);padding:11px;cursor:pointer;font:600 13px 'Work Sans',sans-serif}
+.pay-tab.active{background:var(--gold);color:#111;border-color:var(--gold)}
+.pay-panel{display:none}.pay-panel.on{display:block}
+.ok{color:#8ee0b0}.err{color:#f08080}
+
+.screen{display:none;position:fixed;inset:0;background:rgba(6,6,7,.94);z-index:40;overflow:auto;padding:22px 16px}
+.screen.open{display:block}
+.screen-card{max-width:560px;margin:24px auto;background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:22px}
+.steps{margin:14px 0;padding:0;list-style:none}
+.steps li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px;color:var(--muted);font-size:14px}
+.steps .n{min-width:24px;height:24px;border-radius:50%;background:var(--gold);color:#111;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.ticket{border:1px dashed var(--gold);border-radius:14px;padding:16px;text-align:center;margin-top:14px}
+.ticket-code{font-family:Anton,sans-serif;font-size:28px;letter-spacing:.04em;color:var(--gold2)}
+.pix-box{margin:12px 0;padding:14px;border:1px solid var(--line);border-radius:14px;background:#0c0c0e}
+.pix-qr{width:200px;height:200px;margin:10px auto;background:#fff;border-radius:12px;padding:8px}
+.pix-qr img{width:100%;height:100%;object-fit:contain}
+.pix-code{width:100%;min-height:88px;height:auto;margin:8px 0;border-radius:10px;border:1px solid var(--line);background:#111;color:var(--cream);padding:10px;font-size:12px;word-break:break-all}
+
+.map-sec{padding:8px 0 28px}
+.map-frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;height:260px;background:#0c0c0e;margin:14px 0;position:relative}
+.local-acoes{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+footer{padding:28px 18px;color:var(--muted);border-top:1px solid var(--line);margin-top:40px;text-align:center;font-size:13px}
+.duvida-fab{
+  position:fixed;right:16px;bottom:16px;z-index:35;display:flex;align-items:center;gap:10px;
+  text-decoration:none;color:#111;font-weight:700;background:var(--gold);border:1px solid var(--gold);
+  border-radius:999px;padding:12px 16px 12px 12px;box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+.duvida-fab span.fab-ico{width:28px;height:28px;border-radius:50%;background:#111;color:var(--gold2);display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
+.admin{display:none;position:fixed;inset:0;background:#0a0a0b;z-index:50;overflow:auto;padding:20px}
+.admin.open{display:block}
+.auth{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:60;align-items:center;justify-content:center}
+.auth.open{display:flex}
+.auth-box{width:min(380px,92vw);background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:18px}
+@media(max-width:700px){
+  .duvida-fab .fab-txt{display:none}.duvida-fab{padding:12px}
+  header{padding:8px 12px}.logo-text{font-size:13px}.hero{padding:24px 0 12px}
+}
+</style>
 </head>
 <body>
-<p>Use o arquivo index.html do chat para o deploy completo.</p>
-<p>Esta versão no GitHub será atualizada com o HTML completo em seguida.</p>
+<header>
+  <a class="logo-wrap" href="#topo" id="logo">
+    <div class="logo-3d" aria-hidden="true"><div class="face">P</div></div>
+    <div class="logo-text">Complexo Presida<small>Copa · 5ª Etapa</small></div>
+  </a>
+  <nav class="hdr-nav" aria-label="Seções">
+    <a class="hdr-btn" href="#programacao">Categorias</a>
+    <a class="hdr-btn" href="#local">Como chegar</a>
+  </nav>
+</header>
+
+<section class="hero wrap" id="topo">
+  <div class="hero-badge"><span>5ª Etapa</span> · 16–18 Out · Taguatinga Norte</div>
+  <h1>Copa <em>Presida</em></h1>
+  <p class="hero-lead">Futevôlei no Complexo Presida. Escolha a categoria, preencha a dupla e garanta sua vaga.</p>
+  <div class="p-showcase" id="pShowcase" title="Arraste para girar">
+    <div class="p-cube" id="pCube">
+      <div class="p-face front">P<span class="p-shine"></span></div>
+      <div class="p-face back">P</div>
+      <div class="p-face left">P</div>
+      <div class="p-face right">P</div>
+    </div>
+  </div>
+  <div class="hero-poster-ph" id="heroPoster">
+    <div class="ph-label">Imagem oficial em breve</div>
+  </div>
+</section>
+
+<section class="sec wrap" id="programacao">
+  <h2 class="sec-title">Escolha a categoria</h2>
+  <p class="sec-sub">Toque no card · veja horário · inscreva em um clique</p>
+  <div class="day-tabs" role="tablist">
+    <button type="button" class="day-tab active" data-day="sex" onclick="filtraDia('sex',this)">Sexta 16/10</button>
+    <button type="button" class="day-tab" data-day="sab" onclick="filtraDia('sab',this)">Sábado 17/10</button>
+    <button type="button" class="day-tab" data-day="dom" onclick="filtraDia('dom',this)">Domingo 18/10</button>
+    <button type="button" class="day-tab" data-day="all" onclick="filtraDia('all',this)">Todas</button>
+  </div>
+  <div class="cat-grid" id="catGrid">
+    <button type="button" class="cat-card" data-day="sex" data-cat="Qualify" onclick="selecionarCat(this)">
+      <span class="time">08:00</span><span class="name">Qualify</span><span class="meta">Sexta · 16/10</span><span class="go">Inscrever</span>
+    </button>
+    <button type="button" class="cat-card" data-day="sex" data-cat="Convidado B" onclick="selecionarCat(this)">
+      <span class="time">14:00</span><span class="name">Convidados B</span><span class="meta">Sexta · 16/10</span><span class="go">Inscrever</span>
+    </button>
+    <button type="button" class="cat-card" data-day="sex" data-cat="Convidado A" onclick="selecionarCat(this)">
+      <span class="time">16:00</span><span class="name">Convidados A</span><span class="meta">Sexta · 16/10</span><span class="go">Inscrever</span>
+    </button>
+    <button type="button" class="cat-card hidden" data-day="sab" data-cat="Iniciante" onclick="selecionarCat(this)">
+      <span class="time">08:00</span><span class="name">Iniciante</span><span class="meta">Sábado · 17/10</span><span class="go">Inscrever</span>
+    </button>
+    <button type="button" class="cat-card hidden" data-day="sab" data-cat="Série C" onclick="selecionarCat(this)">
+      <span class="time">11:00</span><span class="name">Série C</span><span class="meta">Sábado · 17/10</span><span class="go">Inscrever</span>
+    </button>
+    <button type="button" class="cat-card hidden off" data-day="sab" data-cat="Profissional" data-off="1" disabled>
+      <span class="time">13:00</span><span class="name">Profissional</span><span class="meta">Sábado · 17/10</span><span class="go">Indisponível</span>
+    </button>
+    <button type="button" class="cat-card hidden" data-day="sab" data-cat="Iniciante Feminino" onclick="selecionarCat(this)">
+      <span class="time">14:00</span><span class="name">Iniciante Feminino</span><span class="meta">Sábado · 17/10</span><span class="go">Inscrever</span>
+    </button>
+    <button type="button" class="cat-card hidden" data-day="sab" data-cat="Misto Aprendiz homem até Série C" onclick="selecionarCat(this)">
+      <span class="time">16:00</span><span class="name">Misto Aprendiz · homem até Série C</span><span class="meta">Sábado · 17/10</span><span class="go">Inscrever</span>
+    </button>
+    <button type="button" class="cat-card hidden" data-day="dom" data-cat="Aprendiz" onclick="selecionarCat(this)">
+      <span class="time">08:00</span><span class="name">Aprendiz</span><span class="meta">Domingo · 18/10</span><span class="go">Inscrever</span>
+    </button>
+    <button type="button" class="cat-card hidden" data-day="dom" data-cat="Feminino A+C / B+B" onclick="selecionarCat(this)">
+      <span class="time">11:00</span><span class="name">Feminino A+C ou B+B</span><span class="meta">Domingo · 18/10</span><span class="go">Inscrever</span>
+    </button>
+    <button type="button" class="cat-card hidden" data-day="dom" data-cat="35+" onclick="selecionarCat(this)">
+      <span class="time">13:00</span><span class="name">35+ · mín. 35 anos · soma 75</span><span class="meta">Domingo · 18/10</span><span class="go">Inscrever</span>
+    </button>
+    <button type="button" class="cat-card hidden off" data-day="dom" data-cat="Profissional" data-off="1" disabled>
+      <span class="time">14:00</span><span class="name">Finais Profissional</span><span class="meta">Domingo · 18/10</span><span class="go">Indisponível</span>
+    </button>
+    <button type="button" class="cat-card hidden" data-day="dom" data-cat="Misto C homem até B" onclick="selecionarCat(this)">
+      <span class="time">15:00</span><span class="name">Misto C · homem até B</span><span class="meta">Domingo · 18/10</span><span class="go">Inscrever</span>
+    </button>
+  </div>
+  <div class="info-3d-wrap" id="info3dWrap">
+    <div class="info-3d" id="info3d">
+      <h3 id="infoName">—</h3>
+      <div class="info-time" id="infoTime">—</div>
+      <p id="infoDesc">Toque em “Inscrever nesta categoria” para abrir o formulário da dupla.</p>
+      <button type="button" class="btn-insc" id="btnInfoInsc" onclick="abrirInscFromInfo()">Inscrever nesta categoria →</button>
+    </div>
+  </div>
+</section>
+
+<section id="inscricao">
+  <div class="wrap">
+    <h2 class="sec-title">Inscrição</h2>
+    <p class="sec-sub">Categoria: <strong id="catLabel">—</strong></p>
+    <div class="card">
+      <form class="form-grid" onsubmit="return false">
+        <div class="form-row-2">
+          <label>Nome do atleta<input id="nome" required placeholder="Nome e sobrenome" autocomplete="name"></label>
+          <label>CPF<input id="cpf" required placeholder="000.000.000-00" inputmode="numeric"></label>
+        </div>
+        <div class="form-row-2">
+          <label>E-mail<input id="email" type="email" required placeholder="voce@email.com" autocomplete="email"></label>
+          <label>Telefone / WhatsApp<input id="whats" required placeholder="(61) 99999-9999" inputmode="tel"></label>
+        </div>
+        <label>Instagram<input id="insta" required placeholder="@seuuser"></label>
+        <h3 style="margin:8px 0 4px;font-size:16px">Parceiro(a)</h3>
+        <p class="note">Só nome e Instagram — facilita o nivelamento da chave.</p>
+        <div class="form-row-2">
+          <label>Nome do parceiro<input id="pNome" required placeholder="Nome e sobrenome"></label>
+          <label>Instagram do parceiro<input id="pInsta" required placeholder="@parceiro"></label>
+        </div>
+      </form>
+    </div>
+    <div class="card" id="cardPagamento" style="display:none">
+      <p class="note" id="pagtoTrava">Preencha a ficha completa do atleta e do parceiro para liberar o pagamento.</p>
+      <h3>Pagamento</h3>
+      <p class="note" id="payHint">PIX R$ 350,00. Cartão R$ 385,00.</p>
+      <div style="display:flex;justify-content:space-between;margin:10px 0 14px"><span id="payCat">Categoria</span><strong id="payVal">R$ 350,00</strong></div>
+      <div class="pay-tabs">
+        <button class="pay-tab active" type="button" data-modo="pix" onclick="setModo('pix')">PIX</button>
+        <button class="pay-tab" type="button" data-modo="cartao" onclick="setModo('cartao')">Cartão</button>
+      </div>
+      <div class="pay-panel" id="panel-cartao">
+        <p class="note">PagBank · Pix ou cartão. Após pagar, você volta ao site e o ingresso é liberado.</p>
+        <button class="btn btn-solid btn-block" type="button" onclick="iniciarPagamento('cartao')">Pagar com PagBank</button>
+      </div>
+      <div class="pay-panel on" id="panel-pix">
+        <p class="note">PIX · Welber Francisco Rodrigue · chave +55 61 98100-0648.</p>
+        <button class="btn btn-solid btn-block" type="button" onclick="abrirTelaMetodo('pix')">Abrir PIX</button>
+      </div>
+      <p class="note" id="payMsg"></p>
+      <button class="btn btn-block" type="button" id="btnJaPaguei" style="display:none" onclick="abrirRetorno(JSON.parse(localStorage.getItem('presida_v2_last')||'null'))">Já paguei no cartão · resgatar ingresso</button>
+      <p class="note">Organização: (61) 99594-5367</p>
+    </div>
+  </div>
+</section>
+
+<section class="map-sec wrap" id="local">
+  <h2 class="sec-title">Como chegar</h2>
+  <p class="sec-sub">Complexo Presida · Taguatinga Norte</p>
+  <div class="card">
+    <p class="note" id="localGeoMsg">Taguatinga Norte · Brasília-DF</p>
+    <div class="map-frame">
+      <iframe title="Mapa Complexo Presida" width="100%" height="100%" style="border:0" loading="lazy"
+        src="https://maps.google.com/maps?q=Complexo+Presida+Taguatinga&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+    </div>
+    <div class="local-acoes">
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Complexo+Presida+Taguatinga" target="_blank" rel="noopener">Abrir no Google Maps</a>
+      <a class="btn" href="https://waze.com/ul?q=Complexo%20Presida%20Taguatinga" target="_blank" rel="noopener">Abrir no Waze</a>
+    </div>
+  </div>
+</section>
+
+<div class="screen" id="telaPixTut">
+  <div class="screen-card" style="text-align:center">
+    <h2>PIX</h2>
+    <p class="note">Tutorial rápido antes do QR Code.</p>
+    <ol class="steps" style="text-align:left">
+      <li><span class="n">1</span><span>Abra o app do seu banco e escolha PIX.</span></li>
+      <li><span class="n">2</span><span>Leia o QR Code ou use Copia e Cola.</span></li>
+      <li><span class="n">3</span><span>Confira o recebedor Welber Francisco Rodrigue.</span></li>
+      <li><span class="n">4</span><span>Pague o valor da dupla e volte para resgatar o ingresso.</span></li>
+    </ol>
+    <p style="font-family:Anton,sans-serif;font-size:64px;margin:10px 0;color:var(--gold)" id="pixTutCount">3</p>
+    <p class="note">O QR Code e o código Copia e Cola aparecem em <strong id="pixTutSec">3</strong> segundos.</p>
+  </div>
+</div>
+
+<div class="screen" id="telaMetodo">
+  <div class="screen-card">
+    <button class="btn" type="button" onclick="fecharTela('telaMetodo')">Voltar</button>
+    <h2 id="metodoTitulo">PIX</h2>
+    <p class="note" id="metodoSub">Pague no app do banco lendo este PIX.</p>
+    <p><strong id="metodoValor">—</strong> · <span id="metodoCat">—</span></p>
+    <div class="pix-box" id="pixSantanderBox">
+      <p class="note">Banco: <strong style="color:var(--cream)">Santander</strong></p>
+      <p class="note">Recebedor: <strong style="color:var(--cream)">Welber Francisco Rodrigue</strong></p>
+      <p class="note">Chave PIX: <strong style="color:var(--cream)">+55 61 98100-0648</strong></p>
+      <div class="pix-qr"><img id="pixQr" alt="QR Code PIX" width="184" height="184"></div>
+      <textarea class="pix-code" id="pixPayload" readonly></textarea>
+      <button class="btn btn-solid btn-block" type="button" onclick="copiarPix()">Copiar código PIX</button>
+      <div id="pixVerifyBox" style="margin-top:16px;padding:14px;border:1px solid var(--line);border-radius:16px;background:#141414">
+        <p style="margin:0 0 8px;font-weight:700;color:var(--cream)">Confirmar PIX</p>
+        <p class="note" id="pixConfirmaHint">Depois de pagar, informe o titular da conta.</p>
+        <label>Nome do titular<input id="pixTitular" placeholder="Nome como está no banco"></label>
+        <label>CPF do titular<input id="pixTitularCpf" placeholder="000.000.000-00" inputmode="numeric"></label>
+        <button class="btn btn-solid btn-block" type="button" id="btnVerificarPix" onclick="marcarPixPago()">Confirmar PIX</button>
+        <div id="pixConfirmSlot"></div>
+        <button class="btn btn-block" type="button" style="margin-top:10px" onclick="enviarComprovanteWhats()">Se der erro, enviar comprovante no WhatsApp</button>
+        <p class="note">Opcional. Só use se o comprovante não bater ou o site falhar.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="telaTutorial">
+  <div class="screen-card">
+    <h2>Como funciona o pagamento</h2>
+    <ol class="steps">
+      <li><span class="n">1</span><span>O checkout PagBank abre (Pix ou cartão).</span></li>
+      <li><span class="n">2</span><span>Você paga normalmente.</span></li>
+      <li><span class="n">3</span><span>Ao concluir, o site volta sozinho para a tela de ingresso.</span></li>
+    </ol>
+    <p class="note" id="tutNota">Após pagar, você é redirecionado de volta para esta página e o ingresso é liberado.</p>
+    <button class="btn btn-solid btn-block" type="button" onclick="seguirParaInfinitePay()">Entendi, ir para o pagamento</button>
+    <button class="btn btn-block" type="button" style="margin-top:8px" onclick="fecharTela('telaTutorial')">Cancelar</button>
+  </div>
+</div>
+
+<div class="screen" id="telaEspera">
+  <div class="screen-card">
+    <h2>Aguardando pagamento</h2>
+    <p class="note">Pague no checkout. Quando terminar, esta tela volta sozinha para o resgate do ingresso.</p>
+    <p class="note" id="esperaMsg">Não feche esta aba.</p>
+    <button class="btn btn-solid btn-block" type="button" onclick="voltarDoPagBank()">Já paguei · voltar ao site</button>
+  </div>
+</div>
+
+<div class="screen" id="telaRetorno">
+  <div class="screen-card">
+    <h2>Confirmar conta paga e resgatar ingresso</h2>
+    <p class="note">Se o pagamento foi concluído, informe o titular da conta e libere o código da dupla.</p>
+    <p>Pedido: <strong id="retRef">—</strong> · <span id="retCat">—</span> · <strong id="retVal">—</strong></p>
+    <label>Nome do titular da conta<input id="titular" placeholder="Como está no banco / cartão"></label>
+    <label>CPF do titular<input id="titularCpf" placeholder="000.000.000-00" inputmode="numeric"></label>
+    <button class="btn btn-solid btn-block" type="button" onclick="confirmarRetorno()">Confirmar e resgatar</button>
+    <p class="note" id="retMsg"></p>
+    <div class="ticket" id="ticketBox" style="display:none">
+      <p class="note">Código da dupla</p>
+      <div class="ticket-code" id="ticketCode">—</div>
+    </div>
+  </div>
+</div>
+
+<div class="auth" id="auth">
+  <div class="auth-box">
+    <h3>Área admin</h3>
+    <label>Senha<input id="authPass" type="password"></label>
+    <button class="btn btn-solid btn-block" type="button" onclick="tryAuth()">Entrar</button>
+  </div>
+</div>
+<div class="admin" id="admin">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <h2>Admin</h2>
+    <button class="btn" type="button" onclick="fecharAdmin()">Fechar</button>
+  </div>
+  <div id="adminBody"></div>
+</div>
+
+<a class="duvida-fab" href="https://wa.me/5561995945367" target="_blank" rel="noopener">
+  <span class="fab-ico">?</span><span class="fab-txt">Dúvidas</span>
+</a>
+
+<footer>
+  <div class="wrap">
+    Copa Presida · Complexo Presida · Taguatinga Norte<br>
+    Organização (61) 99594-5367 · <span style="opacity:.7">versão teste</span>
+  </div>
+</footer>
+
+<script>
+var _selectedBtn = null;
+function filtraDia(day, el){
+  document.querySelectorAll('.day-tab').forEach(function(t){ t.classList.toggle('active', t===el); });
+  document.querySelectorAll('.cat-card').forEach(function(c){
+    var d = c.getAttribute('data-day');
+    c.classList.toggle('hidden', day !== 'all' && d !== day);
+  });
+  document.getElementById('info3dWrap').classList.remove('show');
+}
+function selecionarCat(btn){
+  if(btn.getAttribute('data-off')==='1' || btn.disabled){
+    alert('Inscrições da categoria Profissional estão inativas.');
+    return;
+  }
+  _selectedBtn = btn;
+  var name = btn.getAttribute('data-cat') || '';
+  var time = (btn.querySelector('.time')||{}).textContent || '';
+  var meta = (btn.querySelector('.meta')||{}).textContent || '';
+  document.getElementById('infoName').textContent = name;
+  document.getElementById('infoTime').textContent = time + ' · ' + meta;
+  document.getElementById('infoDesc').textContent = 'Categoria selecionada. Confirme os dados da dupla no formulário abaixo após clicar em Inscrever.';
+  document.getElementById('info3dWrap').classList.add('show');
+  document.getElementById('info3dWrap').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+function abrirInscFromInfo(){ if(_selectedBtn) abrirInsc(_selectedBtn); }
+
+(function(){
+  var cube = document.getElementById('pCube');
+  var stage = document.getElementById('pShowcase');
+  if(!cube || !stage) return;
+  var rotY = -18, rotX = 12, dragging = false, lastX = 0, lastY = 0;
+  function apply(){ cube.style.transform = 'rotateX('+rotX+'deg) rotateY('+rotY+'deg)'; }
+  apply();
+  function start(x,y){ dragging=true; lastX=x; lastY=y; }
+  function move(x,y){
+    if(!dragging) return;
+    rotY += (x-lastX)*0.4; rotX -= (y-lastY)*0.3;
+    rotX = Math.max(-35, Math.min(35, rotX));
+    lastX=x; lastY=y; apply();
+  }
+  function end(){ dragging=false; }
+  stage.addEventListener('mousedown', function(e){ e.preventDefault(); start(e.clientX,e.clientY); });
+  window.addEventListener('mousemove', function(e){ move(e.clientX,e.clientY); });
+  window.addEventListener('mouseup', end);
+  stage.addEventListener('touchstart', function(e){ if(e.touches[0]) start(e.touches[0].clientX,e.touches[0].clientY); }, {passive:true});
+  window.addEventListener('touchmove', function(e){ if(e.touches[0]) move(e.touches[0].clientX,e.touches[0].clientY); }, {passive:true});
+  window.addEventListener('touchend', end);
+  setInterval(function(){ if(!dragging){ rotY += 0.25; apply(); } }, 40);
+})();
+
+var NUVEM='https://copa-presida-default-rtdb.firebaseio.com/presida_v2.json';
+var LINKS={
+  padrao:{pix:350,credito:385,cartaoUrl:'https://pag.ae/82av5Uipo',pixBanco:'Santander',pixNome:'Welber Francisco Rodrigue',pixChave:'+5561981000648',pixPayload:'00020126530014br.gov.bcb.pix0114+55619810006480213Copa presida 5204000053039865406350.005802BR5925WELBER FRANCISCO RODRIGUE6008BRASILIA62580520SAN2026091311192582750300017br.gov.bcb.brcode01051.0.06304010E'},
+  convidado:{pix:600,credito:660,cartaoUrl:'https://pag.ae/82av5xD4o',pixBanco:'Santander',pixNome:'Welber Francisco Rodrigue',pixChave:'+5561981000648',pixPayload:'00020126530014br.gov.bcb.pix0114+55619810006480213Copa presida 5204000053039865406600.005802BR5925WELBER FRANCISCO RODRIGUE6008BRASILIA62580520SAN2026091311244596150300017br.gov.bcb.brcode01051.0.06304EBBC'}
+};
+var catAtual='Iniciante', modoAtual='pix', pedidoPendente=null;
+function isConvidado(c){c=String(c||'').toLowerCase();return c.indexOf('convidado')>=0}
+function tabela(){return isConvidado(catAtual)?LINKS.convidado:LINKS.padrao}
+function preco(modo){var t=tabela();return modo==='pix'?t.pix:t.credito}
+function agoraBrasilia(){
+  var parts={};
+  new Intl.DateTimeFormat('en-GB',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(new Date()).forEach(function(p){parts[p.type]=p.value});
+  return parts.year+'-'+parts.month+'-'+parts.day+'T'+parts.hour+':'+parts.minute+':'+parts.second+'-03:00';
+}
+function fmtDataBR(s){
+  if(!s) return '—';
+  var d=new Date(s);
+  if(isNaN(d.getTime())) return String(s).replace('T',' ').replace('-03:00','').slice(0,16);
+  return new Intl.DateTimeFormat('pt-BR',{timeZone:'America/Sao_Paulo',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(d);
+}
+function fmt(n){return 'R$ '+Number(n).toFixed(2).replace('.',',')}
+function urlPagBank(){return tabela().cartaoUrl}
+function payloadPix(){return tabela().pixPayload}
+function categoriaBloqueada(cat){return String(cat||'').toLowerCase().indexOf('profissional')>=0}
+function abrirInsc(btn){
+  if(btn.getAttribute('data-off')==='1' || btn.disabled || categoriaBloqueada(btn.getAttribute('data-cat'))){
+    alert('Inscrições da categoria Profissional estão inativas.'); return;
+  }
+  catAtual=btn.getAttribute('data-cat')||'Iniciante';
+  document.getElementById('catLabel').textContent=catAtual;
+  document.getElementById('payCat').textContent=catAtual;
+  setModo('pix');
+  document.getElementById('payVal').textContent=fmt(preco('pix'));
+  var box=document.getElementById('inscricao');
+  box.classList.add('show');
+  atualizarTravaPagamento();
+  box.scrollIntoView({behavior:'smooth'});
+}
+function atualizarPrecoTela(){
+  var t=tabela();
+  var hint=document.getElementById('payHint');
+  if(hint) hint.textContent='PIX '+fmt(t.pix)+'. Cartão '+fmt(t.credito)+'.';
+  var pv=document.getElementById('payVal');
+  if(pv) pv.textContent=fmt(preco(modoAtual));
+}
+function setModo(m){
+  if(m==='debito') m='pix';
+  modoAtual=m;
+  try{ atualizarTravaPagamento(); }catch(e){}
+  document.querySelectorAll('.pay-tab').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-modo')===m); });
+  var pc=document.getElementById('panel-cartao'), pp=document.getElementById('panel-pix');
+  if(pc) pc.classList.toggle('on', m==='cartao');
+  if(pp) pp.classList.toggle('on', m==='pix');
+  atualizarPrecoTela();
+  var ja=document.getElementById('btnJaPaguei');
+  if(ja) ja.style.display = (m==='cartao') ? 'block' : 'none';
+}
+function fecharTela(id){document.getElementById(id).classList.remove('open')}
+function abrirTelaMetodo(m){
+  if(!okFormSilencioso()){
+    document.getElementById('payMsg').className='note err';
+    document.getElementById('payMsg').textContent='Preencha a ficha completa do atleta antes do PIX.';
+    return;
+  }
+  modoAtual = m || 'pix'; setModo(modoAtual);
+  document.getElementById('metodoTitulo').textContent='PIX';
+  document.getElementById('metodoSub').textContent='Pague no app do banco lendo este PIX.';
+  document.getElementById('metodoValor').textContent=fmt(preco('pix'));
+  document.getElementById('metodoCat').textContent=catAtual;
+  document.getElementById('pixPayload').value=payloadPix();
+  try{ document.getElementById('pixQr').src='https://api.qrserver.com/v1/create-qr-code/?size=184x184&data='+encodeURIComponent(payloadPix()); }catch(e){}
+  document.getElementById('telaPixTut').classList.add('open');
+  var n=3;
+  document.getElementById('pixTutCount').textContent=n;
+  document.getElementById('pixTutSec').textContent=n;
+  var iv=setInterval(function(){
+    n--; document.getElementById('pixTutCount').textContent=n; document.getElementById('pixTutSec').textContent=n;
+    if(n<=0){ clearInterval(iv); document.getElementById('telaPixTut').classList.remove('open'); document.getElementById('telaMetodo').classList.add('open'); }
+  },1000);
+}
+function copiarPix(){
+  var ta=document.getElementById('pixPayload'); if(!ta) return;
+  ta.select(); try{ document.execCommand('copy'); }catch(e){}
+  if(navigator.clipboard) navigator.clipboard.writeText(ta.value).catch(function(){});
+  document.getElementById('payMsg').className='note ok';
+  document.getElementById('payMsg').textContent='Código PIX copiado.';
+}
+function marcarPixPago(){
+  var nome=document.getElementById('pixTitular').value.trim();
+  var cpf=soDigitos(document.getElementById('pixTitularCpf').value);
+  if(!nome || cpf.length<11){ document.getElementById('pixConfirmSlot').innerHTML='<p class="err">Informe nome e CPF do titular.</p>'; return; }
+  var f=ficha(); f.titular=nome; f.titularCpf=cpf; f.pago=true; f.modo='pix'; f.ts=agoraBrasilia();
+  salvarNuvem(f); localStorage.setItem('presida_v2_last', JSON.stringify(f));
+  document.getElementById('pixConfirmSlot').innerHTML='<p class="ok">PIX confirmado. Código da dupla: <strong>'+(f.codigo||'—')+'</strong></p>';
+}
+function soDigitos(s){return String(s||'').replace(/\D/g,'')}
+function instaLimpo(s){return String(s||'').replace(/^@/,'').trim()}
+function fichaPreenchida(){
+  return !!(document.getElementById('nome').value.trim() && soDigitos(document.getElementById('cpf').value).length>=11 &&
+    document.getElementById('email').value.trim() && document.getElementById('whats').value.trim() &&
+    document.getElementById('insta').value.trim() && document.getElementById('pNome').value.trim() && document.getElementById('pInsta').value.trim());
+}
+function valCampo(id){return (document.getElementById(id)||{}).value||''}
+function okFormSilencioso(){return fichaPreenchida()}
+function atualizarTravaPagamento(){
+  var ok=fichaPreenchida();
+  var card=document.getElementById('cardPagamento'), trava=document.getElementById('pagtoTrava');
+  if(card) card.style.display = ok ? 'block' : 'none';
+  if(trava) trava.style.display = ok ? 'none' : 'block';
+}
+['nome','cpf','email','whats','insta','pNome','pInsta'].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el){ el.addEventListener('input', atualizarTravaPagamento); el.addEventListener('change', atualizarTravaPagamento); }
+});
+function ficha(){
+  var codigo='CP'+Date.now().toString(36).toUpperCase().slice(-6);
+  return {codigo:codigo,cat:catAtual,nome:valCampo('nome').trim(),cpf:soDigitos(valCampo('cpf')),email:valCampo('email').trim(),whats:valCampo('whats').trim(),insta:instaLimpo(valCampo('insta')),pNome:valCampo('pNome').trim(),pInsta:instaLimpo(valCampo('pInsta')),modo:modoAtual,valor:preco(modoAtual),ts:agoraBrasilia()};
+}
+function lerNuvem(cb){ fetch(NUVEM).then(function(r){return r.json()}).then(function(d){cb(d||{})}).catch(function(){cb({})}); }
+function salvarNuvem(obj){
+  fetch(NUVEM.replace(/\.json$/,'/'+encodeURIComponent(obj.codigo||Date.now())+'.json'),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(obj)}).catch(function(){});
+}
+function iniciarPagamento(modo){
+  if(!okFormSilencioso()){ document.getElementById('payMsg').className='note err'; document.getElementById('payMsg').textContent='Preencha a ficha completa.'; return; }
+  modoAtual=modo||'cartao'; setModo(modoAtual);
+  var f=ficha(); pedidoPendente=f; localStorage.setItem('presida_v2_last', JSON.stringify(f));
+  document.getElementById('telaTutorial').classList.add('open');
+}
+function seguirParaInfinitePay(){ fecharTela('telaTutorial'); window.open(urlPagBank(),'_blank'); document.getElementById('telaEspera').classList.add('open'); }
+function voltarDoPagBank(){ fecharTela('telaEspera'); var last=JSON.parse(localStorage.getItem('presida_v2_last')||'null'); if(last) abrirRetorno(last); }
+function abrirRetorno(last){
+  if(!last){ alert('Nenhum pedido encontrado.'); return; }
+  document.getElementById('retRef').textContent=last.codigo||'—';
+  document.getElementById('retCat').textContent=last.cat||'—';
+  document.getElementById('retVal').textContent=fmt(last.valor||0);
+  document.getElementById('telaRetorno').classList.add('open');
+}
+function confirmarRetorno(){
+  var nome=document.getElementById('titular').value.trim();
+  var cpf=soDigitos(document.getElementById('titularCpf').value);
+  if(!nome||cpf.length<11){ document.getElementById('retMsg').className='note err'; document.getElementById('retMsg').textContent='Informe nome e CPF do titular.'; return; }
+  var last=JSON.parse(localStorage.getItem('presida_v2_last')||'null')||ficha();
+  last.titular=nome; last.titularCpf=cpf; last.pago=true; last.ts=agoraBrasilia();
+  salvarNuvem(last); localStorage.setItem('presida_v2_last', JSON.stringify(last));
+  document.getElementById('retMsg').className='note ok'; document.getElementById('retMsg').textContent='Pagamento confirmado.';
+  document.getElementById('ticketBox').style.display='block'; document.getElementById('ticketCode').textContent=last.codigo||'—';
+}
+function enviarComprovanteWhats(){ window.open('https://wa.me/5561995945367?text='+encodeURIComponent('Olá! Segue comprovante PIX Copa Presida - '+catAtual),'_blank'); }
+function tryAuth(){
+  var p=(document.getElementById('authPass')||{}).value||'';
+  if(p==='presida2026'){ document.getElementById('auth').classList.remove('open'); document.getElementById('admin').classList.add('open'); carregarAdmin(); }
+  else alert('Senha incorreta');
+}
+function fecharAdmin(){ document.getElementById('admin').classList.remove('open'); }
+function carregarAdmin(){
+  lerNuvem(function(d){
+    var keys=Object.keys(d||{});
+    var html='<p class="note">'+keys.length+' registros</p><table style="width:100%;border-collapse:collapse;font-size:13px"><tr><th>Código</th><th>Cat</th><th>Nome</th><th>Pago</th></tr>';
+    keys.forEach(function(k){ var r=d[k]||{}; html+='<tr><td>'+(r.codigo||k)+'</td><td>'+(r.cat||'')+'</td><td>'+(r.nome||'')+'</td><td>'+(r.pago?'sim':'não')+'</td></tr>'; });
+    html+='</table>'; document.getElementById('adminBody').innerHTML=html;
+  });
+}
+document.addEventListener('keydown',function(e){ if(e.ctrlKey && e.shiftKey && e.key==='A'){ document.getElementById('auth').classList.add('open'); } });
+(function(){ var last=JSON.parse(localStorage.getItem('presida_v2_last')||'null'); if(location.hash.indexOf('retorno')>=0 && last) abrirRetorno(last); })();
+</script>
 </body>
 </html>
