@@ -5,14 +5,23 @@
 > **NÃO modifica** o repositório original nem o site em produção.
 
 **Original (produção):** https://inscricaocopapresida.com  
-**Repo original:** [opkzin177/inscricao-copa-presida](https://github.com/opkzin177/inscricao-copa-presida) (privado) / [opkzin177/copa-presida](https://github.com/opkzin177/copa-presida)
+**Repo original (legado HTML):** [opkzin177/inscricao-copa-presida](https://github.com/opkzin177/inscricao-copa-presida) (privado)  
+**Repo principal:** [opkzin177/copa-presida](https://github.com/opkzin177/copa-presida)
 
-## Conteúdo
+## Arquivos
 
-- `index.html` — HTML monolítico **exatamente igual** ao do repositório legado `inscricao-copa-presida`.
+- `index.html` — coloque aqui a cópia **exata** do `index.html` do repositório legado (tamanho ~205 KB).
 
-## Uso
+O HTML completo está disponível no chat (arquivo para download) e é **byte-a-byte igual** ao original.
 
-Abra o `index.html` localmente ou faça deploy em um site Netlify de teste separado.
+## Site Netlify de teste criado
 
-**Não altere o site de produção.**
+- Projeto: **inscricao-copa-presida-teste**
+- URL: http://inscricao-copa-presida-teste.netlify.app
+- App: https://app.netlify.com/projects/inscricao-copa-presida-teste
+
+Para publicar o HTML:
+1. Baixe o `index.html` do chat
+2. No Netlify do site de teste, faça drag-and-drop do arquivo (ou conecte este repo e faça push do HTML completo)
+
+**Nada foi alterado no original.**
